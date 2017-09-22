@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/22.
  */
-define(['jquery','template','util'],function($,template,util){
+define(['jquery','template','util','datePicker','language'],function($,template,util){
       var tcId=util.qs('tc_id');
     if(tcId){
       //    编辑
@@ -20,7 +20,6 @@ define(['jquery','template','util'],function($,template,util){
           //添加
         var html=template('teacherTp',{operate:'添加讲师'});
         $('#teacherInfo').html(html);
-
 
       }
 
