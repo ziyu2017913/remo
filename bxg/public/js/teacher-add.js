@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/22.
  */
-define(['jquery','template','util','datePicker','language'],function($,template,util){
+define(['jquery','template','util','datePicker','language','validate','form'],function($,template,util){
       var tcId=util.qs('tc_id');
     if(tcId){
       //    编辑
@@ -14,13 +14,31 @@ define(['jquery','template','util','datePicker','language'],function($,template,
                   data.result.operate='编辑讲师';
                   var html=template('teacherTp',data.result);
                   $('#teacherInfo').html(html);
+                  submitForm('/api/teacher/update');
               }
           });
       }else{
           //添加
         var html=template('teacherTp',{operate:'添加讲师'});
         $('#teacherInfo').html(html);
-
+        //处理表单提交
+        submitForm('/api/teacher/add');
+      }
+       //实现表单提交
+      function  submitForm(url){
+            $('#teacherBtn').click(function(){
+                $.ajax({
+                    type:'post',
+                    url:url,
+                    data:$('#teacherForm').serialize(),
+                    dataType:'json',
+                    success:function(data){
+                        if(data.code==200){
+                            location.href='/teacher/list';
+                        }
+                    }
+                })
+            })
       }
 
 });
