@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/20.
  */
-define(['jquery','template'],function($,template){
+define(['jquery','template','bootstrap'],function($,template){
     $.ajax({
         type:'get',
         url:'/api/teacher',
@@ -36,7 +36,23 @@ define(['jquery','template'],function($,template){
                 })
             })
 
-
+        //     查看讲师
+          $('.preview').click(function(){
+              var td=$(this).parent();
+              // $(this).closest('td')  找到离他最近的父元素
+              var tcId=td.attr('data-tcId');
+              $.ajax({
+                  type:'get',
+                  url:'/api/teacher/view',
+                  data:{tc_id:tcId},
+                  dataType:'json',
+                  success:function(data){
+                      var html=template('teacherView',data.result);
+                      $('#modalInfo').html(html);
+                      $('#teacherModal').modal();
+                  }
+              })
+          })
         }
     })
 });
