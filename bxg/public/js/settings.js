@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/23.
  */
-define(['jquery','template','ckeditor','datePicker','language','upLoadIfy','region'],function($,template,CKEDITOR){
+define(['jquery','template','ckeditor','datePicker','language','upLoadIfy','region','validate','form'],function($,template,CKEDITOR){
     $.ajax({
         type:'get',
         url:'/api/teacher/profile',
@@ -30,10 +30,39 @@ define(['jquery','template','ckeditor','datePicker','language','upLoadIfy','regi
             // 富文本
             CKEDITOR.replace('editor',{
                 toolbarGroups : [
-                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-                    { name: 'links', groups: [ 'links' ] }
+                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                    { name: 'others', groups: [ 'others' ] },
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
                 ]
+            })
+        //    表单提交
+            $('#settingForm').validate({
+                sendForm:false,
+                valid:function(){
+                    //获取家乡信息
+                    var p=$('#p').find('option:selected').text();
+                    var c=$('#c').find('option:selected').text();
+                    var d=$('#d').find('option:selected').text();
+                    var hometown =p+ '|'+c+"|"+d;
+                    //同步富文本内容
+                     for(var instance in CKEDITOR.instances){
+                         CKEDITOR.instances[instance].updateElement();
+                     };
+                    //提交表单
+                    $(this).ajaxSubmit({
+                        type:'post',
+                        url:'/api/teacher/modify',
+                        dataType:'json',
+                        data:{tc_hometown:hometown},
+                        success:function(data){
+                            if(data.code==200){
+                                location.reload();
+                            }
+                        }
+
+                    })
+                }
             })
         }
     })
