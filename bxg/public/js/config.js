@@ -13,14 +13,14 @@ require.config({
         validate:'validate/jquery-validate',
         form:'jquery-form/jquery.form',
         upLoadIfy:'uploadify/jquery.uploadify.min',
+        region:'jquery-region/jquery.region',
+        ckeditor:'ckeditor/ckeditor',
         util:'../js/util',
         common:'../js/common',
         login:'../js/login',
         teacherList:'../js/teacher-list',
         teacherAdd:'../js/teacher-add',
-        settings:'../js/settings',
-        region:'jquery-region/jquery.region'
-
+        settings:'../js/settings'
     },
     shim:{
         bootstrap:{
@@ -34,6 +34,9 @@ require.config({
         },
         upLoadIfy:{
             deps:['jquery']
+        },
+        ckeditor:{
+            exports:'CKEDITOR'
         }
 
     }

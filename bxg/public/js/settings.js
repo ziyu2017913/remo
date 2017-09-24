@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/23.
  */
-define(['jquery','template','datePicker','language','upLoadIfy','region'],function($,template){
+define(['jquery','template','ckeditor','datePicker','language','upLoadIfy','region'],function($,template,CKEDITOR){
     $.ajax({
         type:'get',
         url:'/api/teacher/profile',
@@ -26,6 +26,14 @@ define(['jquery','template','datePicker','language','upLoadIfy','region'],functi
             //处理省市县三级联动
             $('#pcd').region({
                 url:'/public/assets/jquery-region/region.json'
+            });
+            // 富文本
+            CKEDITOR.replace('editor',{
+                toolbarGroups : [
+                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+                    { name: 'links', groups: [ 'links' ] }
+                ]
             })
         }
     })
