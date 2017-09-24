@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/23.
  */
-define(['jquery','template','datePicker','language','upLoadIfy'],function($,template){
+define(['jquery','template','datePicker','language','upLoadIfy','region'],function($,template){
     $.ajax({
         type:'get',
         url:'/api/teacher/profile',
@@ -22,6 +22,10 @@ define(['jquery','template','datePicker','language','upLoadIfy'],function($,temp
                    var obj=JSON.parse(b);
                     $('.preview img').attr('src',obj.result.path)
                 }
+            });
+            //处理省市县三级联动
+            $('#pcd').region({
+                url:'/public/assets/jquery-region/region.json'
             })
         }
     })
