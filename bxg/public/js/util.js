@@ -19,7 +19,11 @@ define(['jquery'],function(){
                  })
              }
              return result;
+         },
+         setMenu:function(path){
+             $('.aside  .navs  .list-unstyled  a[href="'+path+'"]').addClass('active').closest('ul').show()
          }
+
      }
 
 });

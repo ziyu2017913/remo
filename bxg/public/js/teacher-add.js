@@ -2,6 +2,7 @@
  * Created by lenovo on 2017/9/22.
  */
 define(['jquery','template','util','datePicker','language','validate','form'],function($,template,util){
+
       var tcId=util.qs('tc_id');
     if(tcId){
       //    编辑
