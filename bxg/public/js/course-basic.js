@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/25.
  */
-define(['jquery', 'template', 'util','ckeditor'], function ($, template, util,CKEDITOR) {
+define(['jquery', 'template', 'util','ckeditor','validate','form'], function ($, template, util,CKEDITOR) {
     //设置导航菜单选中
     util.setMenu('/course/courseAdd');
     //获取课程ID
@@ -23,7 +23,7 @@ define(['jquery', 'template', 'util','ckeditor'], function ($, template, util,CK
             var html = template('basicTpl', data.result);
             $('#basicInfo').html(html);
             //处理二级分类的下拉联动
-            $('#firstType').change(function () {
+            $('#firstType').change(function () {    //change 事件 当元素的值发生改变发生事件
                 //获取一级分类的值
                 var pid = $(this).val();
                 $.ajax({
@@ -48,6 +48,27 @@ define(['jquery', 'template', 'util','ckeditor'], function ($, template, util,CK
                     { name: 'styles', groups: [ 'styles' ] },
                     { name: 'colors', groups: [ 'colors' ] },
                 ]
+            })
+        //    提交表单
+            $('#basicForm').validate({
+                sendForm:false,
+                valid:function(){
+                    //富文本提交
+                    for(var instance in CKEDITOR.instances){
+                        CKEDITOR.instances[instance].updateElement();
+                    };
+                    $(this).ajaxSubmit({
+                        type:'post',
+                        url:'/api/course/update/basic',
+                        dataType:'json',
+                        data:{cs_id:csId},
+                        success:function(data){
+                            if(data.code==200){
+                                location.href='/course/picture?cs_id='+csId
+                            }
+                        }
+                    })
+                }
             })
         }
     });
