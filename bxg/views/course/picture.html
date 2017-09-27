@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
+    <link href="/public/assets/jcrop/css/Jcrop.css" rel="stylesheet">
     <?php include('./views/common/style.html'); ?>
 </head>
 <body>
@@ -16,9 +17,14 @@
             <?php include('./views/common/header.html'); ?>
             <div class="body course-add" id="pictureInfo">
                 <!-- 面包屑 -->
-
             </div>
         </div>
+        <form id="cropForm" style="display:none">
+            <input type="text" name="x">
+            <input type="text" name="y">
+            <input type="text" name="w">
+            <input type="text" name="h">
+        </form>
     </div>
      <script type="text/template" id="pictureTpl">
          <ol class="breadcrumb">
@@ -69,9 +75,9 @@
                  <div class="picture col-xs-offset-2">
                      <div class="preview">
                          {{if cs_cover_original}}
-                         <img src="{{cs_cover_original}}" alt="">
+                         <img src="{{cs_cover_original}}">
                          {{else}}
-                         <img src="/public/uploads/course.png" alt="">
+                         <img src="/uploads/course.png">
                          {{/if}}
 
                      </div>
@@ -82,7 +88,7 @@
                          <input type="file" id="myfile"  value="选择图片">
                      </div>
                      <div class="col-xs-2">
-                         <a href="javascript:;" class="btn btn-warning btn-sm" disabled>裁切图片</a>
+                         <a href="javascript:;" id="cropBtn" class="btn btn-warning btn-sm" >裁切图片</a>
                      </div>
                  </div>
              </div>

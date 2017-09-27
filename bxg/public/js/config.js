@@ -10,11 +10,12 @@ require.config({
         bootstrap:'bootstrap/js/bootstrap.min',
         datePicker:'bootstrap-datepicker/js/bootstrap-datepicker',//日期插件
         language:'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min', //中文显示日期插件
-        validate:'validate/jquery-validate',  //表单验证插件
-        form:'jquery-form/jquery.form',      //表单提交插件
-        upLoadIfy:'uploadify/jquery.uploadify.min', //上传文件异步插件
-        region:'jquery-region/jquery.region',    //三级联动插件
-        ckeditor:'ckeditor/ckeditor',            //富文本插件
+        validate:'validate/jquery-validate',                //表单验证插件
+        form:'jquery-form/jquery.form',                     //表单提交插件
+        upLoadIfy:'uploadify/jquery.uploadify.min',         //上传文件异步插件
+        region:'jquery-region/jquery.region',               //三级联动插件
+        ckeditor:'ckeditor/ckeditor',                      //富文本插件
+        jcrop:'jcrop/js/Jcrop',                            //截切
         util:'../js/util',
         common:'../js/common',
         login:'../js/login',
@@ -42,6 +43,9 @@ require.config({
         },
         ckeditor:{
             exports:'CKEDITOR'
+        },
+        jcrop:{
+            deps:['jquery']
         }
 
     }

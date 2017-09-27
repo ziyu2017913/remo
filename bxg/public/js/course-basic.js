@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/9/25.
  */
-define(['jquery', 'template', 'util','ckeditor','validate','form'], function ($, template, util,CKEDITOR) {
+define(['jquery', 'template', 'util','ckeditor','validate','form','jcrop'], function ($, template, util,CKEDITOR) {
     //设置导航菜单选中
     util.setMenu('/course/courseAdd');
     //获取课程ID
